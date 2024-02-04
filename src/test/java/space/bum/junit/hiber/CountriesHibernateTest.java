@@ -1,5 +1,9 @@
 package space.bum.junit.hiber;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +13,7 @@ import javax.persistence.Persistence;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import space.bum.junit.hiber.model.Country;
 
@@ -35,6 +40,16 @@ class CountriesHibernateTest {
       em.persist(c);
     }
     em.getTransaction().commit();
+  }
+
+  @Test
+  public void testCountryList() {
+    @SuppressWarnings("unchecked")
+    List<Country> countries = em.createQuery("select c from Country c")
+        .getResultList();
+    assertNotNull(countries);
+    assertEquals(COUNTRY_INIT_DATA.length, countries.size());
+    countries.forEach(country -> expectedCountryList.contains(country));
   }
 
   @AfterEach
