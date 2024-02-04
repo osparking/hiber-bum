@@ -27,12 +27,12 @@ public class Country {
   private int id;
   
   @Column(name = "NAME")
-  private int name;
+  private String name;
   
   @Column(name = "CODE_NAME")
-  private int code_name;
+  private String code_name;
 
-  public Country(int name, int code_name) {
+  public Country(String name, String code_name) {
     super();
     this.name = name;
     this.code_name = code_name;
