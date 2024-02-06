@@ -2,7 +2,7 @@ package space.bum.junit.hiber;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +50,17 @@ class CountriesHibernateTest {
     assertNotNull(countries);
     assertEquals(COUNTRY_INIT_DATA.length, countries.size());
     countries.forEach(country -> expectedCountryList.contains(country));
+
+  @Test
+  public void test국CountryList() {
+    @SuppressWarnings("unchecked")
+    List<Country> countries = em
+        .createQuery("select c from Country c where c.name like '%국%'")
+        .getResultList();
+    assertNotNull(countries);
+    assertEquals(expected국포함CountryList.size(), countries.size());
+    countries.forEach(
+        country -> assertTrue(expected국포함CountryList.contains(country)));
   }
 
   @AfterEach
