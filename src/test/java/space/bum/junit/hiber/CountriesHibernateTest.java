@@ -49,7 +49,9 @@ class CountriesHibernateTest {
         .getResultList();
     assertNotNull(countries);
     assertEquals(COUNTRY_INIT_DATA.length, countries.size());
-    countries.forEach(country -> expectedCountryList.contains(country));
+    countries
+        .forEach(country -> assertTrue(expectedCountryList.contains(country)));
+  }
 
   @Test
   public void test국CountryList() {
