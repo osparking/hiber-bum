@@ -1,5 +1,7 @@
 package space.bum.junit.hiber.model;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,6 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString
 @NoArgsConstructor
 @Entity
@@ -36,5 +37,23 @@ public class Country {
     super();
     this.name = name;
     this.code_name = code_name;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(code_name, name);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Country other = (Country) obj;
+    return Objects.equals(code_name, other.code_name)
+        && Objects.equals(name, other.name);
   }
 }
